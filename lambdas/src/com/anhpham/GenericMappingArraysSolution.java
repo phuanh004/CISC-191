@@ -25,7 +25,7 @@ public class GenericMappingArraysSolution {
         List<Double> mapDoubleMappings = Arrays.asList(-12.0, -6.0, 0.0, 6.0, 12.0);
 
         String mapString;
-        List<String> mapStringMappings = Arrays.asList("A", "E", "M", "S", "W", "Z");
+        List<Character> mapStringMappings = Arrays.asList('A', 'E', 'M', 'S', 'W', 'Z');
 
         String absorbInput;           // To read a string after a number
 
@@ -57,8 +57,8 @@ public class GenericMappingArraysSolution {
         System.out.print("\nEnter a string value to map: ");
         mapString = scnr.nextLine();
 
-        String mapStringResult = mapStringMappings.stream()
-                .filter((number) -> number.compareTo(mapString) > 0)
+        char mapStringResult = mapStringMappings.stream()
+                .filter((c) -> c.compareTo(mapString.charAt(0)) >= 0)
                 .findFirst().orElseThrow();
 
         printResult(mapString, mapStringMappings, mapStringResult);
