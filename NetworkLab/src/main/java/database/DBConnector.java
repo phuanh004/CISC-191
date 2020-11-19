@@ -15,7 +15,7 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-public class DBConnector implements TodoRepo {
+public class DBConnector implements TodoRepo{
     private MongoClient mongoClient;
     private MongoCollection<ToDo> toDoCollection;
 
@@ -39,7 +39,7 @@ public class DBConnector implements TodoRepo {
 
         // Retrieving the todo collection
         toDoCollection = database.getCollection("todo", ToDo.class);
-        System.out.println("Collection myCollection selected successfully");
+        System.out.println("*** Connected to the database");
     }
 
     @Override
@@ -51,13 +51,15 @@ public class DBConnector implements TodoRepo {
     public void addToDo(ToDo toDo) {
         toDoCollection.insertOne(toDo);
 
+        System.out.println("*** Added todo: " + toDo.getTitle());
+
 //        Document document = new Document("title", toDo.getTitle())
 //            .append("description", toDo.getDescription())
 //            .append("do_date", toDo.getDateInDisplayFormat("EEE, MMM d", toDo.getDoDate()))
 //            .append("due_date", toDo.getDateInDisplayFormat("EEE, MMM d", toDo.getDueDate()));
 
 //        toDoCollection.insertOne(document);
-        System.out.println("Document inserted successfully");
+
     }
 
     @Override
@@ -67,6 +69,11 @@ public class DBConnector implements TodoRepo {
 
     @Override
     public void showToDoList() {
+//        Block<ToDo> printBlock = toDo -> System.out.println(toDo.toString());
+
+        System.out.println("*** Print to-do list: ");
         toDoCollection.find().forEach(toDo -> System.out.println(toDo.toString()));
+
+//        toDoCollection.find().forEach(toDo -> System.out.println(toDo.toString()));
     }
 }

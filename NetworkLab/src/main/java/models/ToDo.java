@@ -1,10 +1,7 @@
 package models;
 
 import org.bson.BsonType;
-import org.bson.codecs.pojo.annotations.BsonDiscriminator;
-import org.bson.codecs.pojo.annotations.BsonId;
-import org.bson.codecs.pojo.annotations.BsonIgnore;
-import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.codecs.pojo.annotations.*;
 import org.bson.types.ObjectId;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
@@ -20,6 +17,7 @@ public class ToDo implements Serializable {
     //User's two attribute:
 
     @BsonId
+    @BsonRepresentation(BsonType.OBJECT_ID)
     private String id;
 
     @BsonProperty(value = "title")
@@ -48,6 +46,8 @@ public class ToDo implements Serializable {
     }
 
     //Getters:
+    @BsonId
+    @BsonRepresentation(BsonType.OBJECT_ID)
     public String getID() {
         return this.id;
     }
@@ -100,7 +100,30 @@ public class ToDo implements Serializable {
         return String.valueOf(System.currentTimeMillis() / 1000L);
     }
 
+    /**
+     * Format the remaining days
+     * @return result in display format
+     */
+    @BsonIgnore
+    public String getFormattedRemainingDays() {
+        String result = "";
+        Integer remainDays = getRemainingDays();
+
+        if (remainDays == null) { return result; }
+        else if (remainDays == 0) {
+            result = "Due today";
+        } else if (remainDays > 0) {
+            result = remainDays + " days left";
+        } else if (remainDays < 0){
+            result = Math.abs(remainDays) + " days ago";
+        }
+
+        return result;
+    }
+
     //Setters:
+    @BsonId
+    @BsonRepresentation(BsonType.OBJECT_ID)
     public void setID(String id) {
         this.id = id;
     }
@@ -161,16 +184,30 @@ public class ToDo implements Serializable {
     @BsonIgnore
     @Override
     public String toString() {
-        return String.format("%s")
+        StringBuilder builder = new StringBuilder("To-do - ");
 
-                "ToDo{" +
-                "id:'" + id + '\'' +
-                ", title:'" + title + '\'' +
-                ", description:'" + description + '\'' +
-                ", createdDate:'" + createdDate + '\'' +
-                ", dueDate:'" + dueDate + '\'' +
-                ", doDate:'" + doDate + '\'' +
-                ", remaining days:'" + getRemainingDays() + '\'' +
-                '}';
+        builder.append(id).append(":").append("\n");
+        builder.append("title: ").append(title).append("\n");
+        if (!description.isEmpty()) {
+            builder.append("description: ").append(description).append("\n");
+        }
+
+        if (!dueDate.isEmpty()) {
+            builder.append(getFormattedRemainingDays()).append("\n");
+        }
+
+        builder.append("-----------------------------------");
+
+        return builder.toString();
+
+//                "ToDo{" +
+//                "id:'" + id + '\'' +
+//                ", title:'" + title + '\'' +
+//                ", description:'" + description + '\'' +
+//                ", createdDate:'" + createdDate + '\'' +
+//                ", dueDate:'" + dueDate + '\'' +
+//                ", doDate:'" + doDate + '\'' +
+//                ", remaining days:'" + getRemainingDays() + '\'' +
+//                '}';
     }
 }

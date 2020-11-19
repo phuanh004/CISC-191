@@ -14,4 +14,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'org.mongodb:mongodb-driver-sync:4.2.0-beta1'
     implementation 'joda-time:joda-time:2.10.8'
+    implementation 'com.github.javafaker:javafaker:0.12'
 }

@@ -1,2 +1,17 @@
 *.DS_Store
 .DS_Store
+NetworkLab/.idea/workspace.xml
+NetworkLab/.idea/vcs.xml
+NetworkLab/.idea/NetworkLab.iml
+NetworkLab/.gradle/checksums/sha1-checksums.bin
+NetworkLab/.gradle/checksums/md5-checksums.bin
+NetworkLab/.gradle/checksums/checksums.lock
+NetworkLab/.gradle/buildOutputCleanup/outputFiles.bin
+NetworkLab/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+NetworkLab/.gradle/6.3/javaCompile/taskHistory.bin
+NetworkLab/.gradle/6.3/javaCompile/javaCompile.lock
+NetworkLab/.gradle/6.3/javaCompile/classAnalysis.bin
+NetworkLab/.gradle/6.3/fileHashes/fileHashes.lock
+NetworkLab/.gradle/6.3/fileHashes/fileHashes.bin
+NetworkLab/.gradle/6.3/executionHistory/executionHistory.lock
+NetworkLab/.gradle/6.3/executionHistory/executionHistory.bin
