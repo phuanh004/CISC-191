@@ -25,22 +25,12 @@ public class Main {
         // Disconnect to the database
         connector.stopConnector();
 
-//        while (isContinue) {
-//            printMenu();
-//        }
-//
-//        Document document = new Document("title", "MongoDB")
-//                .append("description", "database")
-//                .append("likes", 100)
-//                .append("url", "http://www.tutorialspoint.com/mongodb/")
-//                .append("by", "tutorials point");
-//
-//        collection.insertOne(document);
-//        System.out.println("Document inserted successfully");
-//
-
     }
 
+    /**
+     * Generate random to-do
+     * @return a to-do
+     */
     private static ToDo generateNewTodo() {
         // Random from 0 - 3
         int rand = (int) (Math.random() * 3);
@@ -51,6 +41,7 @@ public class Main {
         Faker faker = new Faker(new Locale("en-US"));
         ToDo toDo = new ToDo();
 
+        // Set new to-do
         toDo.setDueDate(String.valueOf(randomEpoch));
 
         switch (rand) {

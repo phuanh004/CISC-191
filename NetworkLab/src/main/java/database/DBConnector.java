@@ -1,7 +1,5 @@
 package database;
 
-
-import com.mongodb.Block;
 import com.mongodb.MongoClientSettings;
 
 import com.mongodb.client.MongoClient;
@@ -45,35 +43,20 @@ public class DBConnector implements TodoRepo{
     @Override
     public void stopConnector() {
         mongoClient.close();
+        System.out.println("*** Closed connection to the database");
     }
 
     @Override
     public void addToDo(ToDo toDo) {
         toDoCollection.insertOne(toDo);
-
-        System.out.println("*** Added todo: " + toDo.getTitle());
-
-//        Document document = new Document("title", toDo.getTitle())
-//            .append("description", toDo.getDescription())
-//            .append("do_date", toDo.getDateInDisplayFormat("EEE, MMM d", toDo.getDoDate()))
-//            .append("due_date", toDo.getDateInDisplayFormat("EEE, MMM d", toDo.getDueDate()));
-
-//        toDoCollection.insertOne(document);
-
-    }
-
-    @Override
-    public void deleteToDo(String id) {
+        System.out.println("*** Added a new to-do: " + toDo.getTitle());
 
     }
 
     @Override
     public void showToDoList() {
-//        Block<ToDo> printBlock = toDo -> System.out.println(toDo.toString());
-
         System.out.println("*** Print to-do list: ");
+        System.out.println("-----------------------------------");
         toDoCollection.find().forEach(toDo -> System.out.println(toDo.toString()));
-
-//        toDoCollection.find().forEach(toDo -> System.out.println(toDo.toString()));
     }
 }

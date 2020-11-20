@@ -188,26 +188,20 @@ public class ToDo implements Serializable {
 
         builder.append(id).append(":").append("\n");
         builder.append("title: ").append(title).append("\n");
-        if (!description.isEmpty()) {
+        if (description != null) {
             builder.append("description: ").append(description).append("\n");
         }
-
-        if (!dueDate.isEmpty()) {
+        if (doDate != null) {
+            builder.append("I will do it on: ")
+                    .append(getDateInDisplayFormat("EEE, MMM d", doDate))
+                    .append("\n");
+        }
+        if (dueDate != null) {
             builder.append(getFormattedRemainingDays()).append("\n");
         }
 
         builder.append("-----------------------------------");
 
         return builder.toString();
-
-//                "ToDo{" +
-//                "id:'" + id + '\'' +
-//                ", title:'" + title + '\'' +
-//                ", description:'" + description + '\'' +
-//                ", createdDate:'" + createdDate + '\'' +
-//                ", dueDate:'" + dueDate + '\'' +
-//                ", doDate:'" + doDate + '\'' +
-//                ", remaining days:'" + getRemainingDays() + '\'' +
-//                '}';
     }
 }
